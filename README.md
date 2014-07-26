@@ -19,6 +19,9 @@ Info from the original repo:
 
 
 I modfied the code to add SwipeRefreshLayout and a message of "Pull Down To Refresh" to the code.
+Screenshots: https://github.com/pauldmps/Gmail-like-Pull-Down-to-Refresh/wiki/Screenshots
+
+I was not able to implement Gmail-like "Swipe to refresh" message being displyed on the action bar itself. If you can implement it using short amount of code, send a pull request.
 
     Usage:
     

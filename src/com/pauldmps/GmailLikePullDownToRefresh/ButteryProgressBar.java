@@ -1,12 +1,12 @@
-package com.abRc.GmailStyleProgressbar;
+package com.pauldmps.GmailLikePullDownToRefresh;
 /**
  * Below class is copied from android Kit-Kat project source code
  * URL:-https://android.googlesource.com/platform/packages/apps/UnifiedEmail/+/kitkat-release/src/com/android/mail/ui/ButteryProgressBar.java
  * Source is provided without any guarantee or warranty 
  */
+
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
@@ -69,19 +69,11 @@ public class ButteryProgressBar extends View {
 
 		mDensity = c.getResources().getDisplayMetrics().density;
 
-		 final TypedArray ta = c.obtainStyledAttributes(attrs, R.styleable.ButteryProgressBar);
-	        try {
-	            mBarColor = ta.getColor(R.styleable.ButteryProgressBar_barColor,
-	                    c.getResources().getColor(android.R.color.holo_blue_light));
-	            mSolidBarHeight = ta.getDimensionPixelSize(
-	                    R.styleable.ButteryProgressBar_barHeight,
-	                    Math.round(DEFAULT_BAR_HEIGHT_DP * mDensity));
-	            mSolidBarDetentWidth = ta.getDimensionPixelSize(
-	                    R.styleable.ButteryProgressBar_detentWidth,
-	                    Math.round(DEFAULT_DETENT_WIDTH_DP * mDensity));
-	        } finally {
-	            ta.recycle();
-	        }
+		
+	        mBarColor = c.getResources().getColor(android.R.color.holo_blue_light);
+			mSolidBarHeight = Math.round(DEFAULT_BAR_HEIGHT_DP * mDensity);
+			mSolidBarDetentWidth = Math.round(DEFAULT_DETENT_WIDTH_DP * mDensity);
+
 
 		mAnimator = new ValueAnimator();
 		mAnimator.setFloatValues(1.0f, 2.0f);

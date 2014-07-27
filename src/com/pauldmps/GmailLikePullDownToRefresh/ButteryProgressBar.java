@@ -5,14 +5,20 @@ package com.pauldmps.GmailLikePullDownToRefresh;
  * Source is provided without any guarantee or warranty 
  */
 
+
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
 /**
  * Procedurally-drawn version of a horizontal indeterminate progress bar. Draws faster and more
  * frequently (by making use of the animation timer), requires minimal memory overhead, and allows
@@ -60,17 +66,17 @@ public class ButteryProgressBar extends View {
 	private static final int DEFAULT_BAR_HEIGHT_DP = 4;
 	private static final int DEFAULT_DETENT_WIDTH_DP = 4;
 
-	public ButteryProgressBar(Context c) {
+	private ButteryProgressBar(Context c) {
 		this(c, null);
 	}
 
-	public ButteryProgressBar(Context c, AttributeSet attrs) {
+	private ButteryProgressBar(Context c, AttributeSet attrs) {
 		super(c, attrs);
 
 		mDensity = c.getResources().getDisplayMetrics().density;
 
 		
-	        mBarColor = c.getResources().getColor(android.R.color.holo_blue_light);
+	        mBarColor = c.getResources().getColor(R.color.holo_blue_light);
 			mSolidBarHeight = Math.round(DEFAULT_BAR_HEIGHT_DP * mDensity);
 			mSolidBarDetentWidth = Math.round(DEFAULT_DETENT_WIDTH_DP * mDensity);
 
@@ -175,5 +181,30 @@ public class ButteryProgressBar extends View {
 		}
 
 	}
+	
+	public static ButteryProgressBar getInstance(Context context){
+		final ButteryProgressBar obj = new ButteryProgressBar(context);
+        obj.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 24));
+
+		final FrameLayout decorView = (FrameLayout) ((Activity) context).getWindow().getDecorView();
+		decorView.addView(obj);
+        final View contentView = decorView.findViewById(android.R.id.content);
+
+		ViewTreeObserver observer = obj.getViewTreeObserver();
+		observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+		    @Override
+		    public void onGlobalLayout() {
+		        obj.setY(contentView.getY());
+		        ViewTreeObserver observer = obj.getViewTreeObserver();
+		        observer.removeGlobalOnLayoutListener(this);
+		    }
+		});
+		
+		obj.setVisibility(View.INVISIBLE);
+		return obj;
+		
+	}
+	
+
 
 }

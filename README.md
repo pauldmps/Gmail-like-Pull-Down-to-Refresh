@@ -25,7 +25,7 @@ I was not able to implement Gmail-like "Swipe to refresh" message being displyed
 
     Usage:
     
-    Requires API Level 11 (Android 3.0 Honeycomb) or later.
+    Requires API Level 14 (Android 4.0 Ice Cream Sandwich) or later.
     Requires Android.Support.v4 & Android.Support.v7.AppCompat libraries to be referenced in the project.
     
     The MainActivity.java contains the bare minimum code required to implement this. Tweak as necessary.
@@ -59,11 +59,16 @@ I was not able to implement Gmail-like "Swipe to refresh" message being displyed
         </android.support.v4.widget.SwipeRefreshLayout>
     tags.
     
+   Get an instance of the ButteryProgressBar by calling:
+        ButteryProgressBar progressBar = ButteryProgressBar.getInstance(YourActivity.this);  
+    
+    Do not call the constructor of ButteryProgressBar class. 
+        
     To start the animation, call the object to ButteryProgressBar.java that you implement as:
          
          progressBar.setVisibility(View.VISIBLE);
          
-    Similarily, to stop the animation, call 
+    Similarly, to stop the animation, call 
          progressBar.setVisibility(View.INVISIBLE);
          
 

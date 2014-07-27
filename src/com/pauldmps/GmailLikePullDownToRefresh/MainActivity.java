@@ -7,11 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.pauldmps.GmailLikePullDownToRefresh.ButteryProgressBar;
@@ -31,25 +27,8 @@ public class MainActivity extends ActionBarActivity implements OnRefreshListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		progressBar = new ButteryProgressBar(this);
-		progressBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 24));
+		progressBar = ButteryProgressBar.getInstance(this);
 		
-		
-		final FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
-		decorView.addView(progressBar);
-        final View contentView = decorView.findViewById(android.R.id.content);
-
-		ViewTreeObserver observer = progressBar.getViewTreeObserver();
-		observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-		    @Override
-		    public void onGlobalLayout() {
-		        progressBar.setY(contentView.getY());
-		        ViewTreeObserver observer = progressBar.getViewTreeObserver();
-		        observer.removeGlobalOnLayoutListener(this);
-				progressBar.setVisibility(View.INVISIBLE);		
-
-		    }
-		});
 		
 		lv = (ListView)findViewById(R.id.listView1);
 	    ArrayAdapter<String> adp = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1,list);

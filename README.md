@@ -1,4 +1,6 @@
     
+Update: This project has been deprecated. The newest swipeRefreshLayout from Google uses the new Material Design & does not need this workaround.
+    
 Forked from https://github.com/akash-rayate/abRc-Gmail_like_progressbar 
     
 Info from the original repo:
